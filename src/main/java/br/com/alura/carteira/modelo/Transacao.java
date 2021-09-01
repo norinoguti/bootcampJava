@@ -2,19 +2,26 @@ package br.com.alura.carteira.modelo;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+
 
 public class Transacao {
 
 	private String ticker;
 	private BigDecimal preco;
 	private LocalDate data;
-	private int quantidade;
 	private TipoTransacao tipo;
+	private int quantidade;
+	
+	
+
+
 
 	@Override
 	public String toString() {
-		return "Transacao [ticker=" + ticker + ", preco=" + preco + ", data=" + data + ", quantidade=" + quantidade
-				+ ", tipo=" + tipo + "]";
+		return "Transacao [ticker=" + ticker + ", preco=" + preco + ", data=" + data + ", tipo=" + tipo
+				+ ", quantidade=" + quantidade + "]";
 	}
 
 	public Transacao() {

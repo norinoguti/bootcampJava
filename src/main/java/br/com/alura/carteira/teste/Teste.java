@@ -9,7 +9,8 @@ import br.com.alura.carteira.modelo.Transacao;
 
 public class Teste {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) {	
+		
 
 		Transacao t = new Transacao();
 		t.setTicker("ITSA4");
@@ -23,7 +24,8 @@ public class Teste {
 		System.out.println(t.getQuantidade());
 		System.out.println(t.getData().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 		System.out.println(t.getTipo());
-
+		
+		
 		Transacao t2 = new Transacao("XPTO12", new BigDecimal("12.7"), LocalDate.now(), 200, TipoTransacao.VENDA);
 
 		System.out.println(t2);
