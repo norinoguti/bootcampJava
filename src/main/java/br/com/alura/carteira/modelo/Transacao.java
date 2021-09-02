@@ -8,11 +8,11 @@ import java.time.format.DateTimeFormatter;
 
 public class Transacao {
 
-	private String ticker;
-	private BigDecimal preco;
+	private String ticker;	
 	private LocalDate data;
-	private TipoTransacao tipo;
+	private BigDecimal preco;
 	private int quantidade;
+	private TipoTransacao tipo;
 	
 	
 
@@ -24,17 +24,22 @@ public class Transacao {
 				+ ", quantidade=" + quantidade + "]";
 	}
 
-	public Transacao() {
-	}
+	
 
-	public Transacao(String ticker, BigDecimal preco, LocalDate data, int quantidade, TipoTransacao tipo) {
-		super();
+	public Transacao() {};
+
+	public Transacao(String ticker, LocalDate data, BigDecimal preco, int quantidade, TipoTransacao tipo) {
+		
 		this.ticker = ticker;
-		this.preco = preco;
 		this.data = data;
+		this.preco = preco;
 		this.quantidade = quantidade;
 		this.tipo = tipo;
 	}
+
+
+
+
 
 	public String getTicker() {
 		return ticker;
@@ -72,8 +77,8 @@ public class Transacao {
 		return tipo;
 	}
 
-	public void setTipo(TipoTransacao string) {
-		this.tipo = string;
+	public void setTipo(TipoTransacao tipo) {
+		this.tipo = tipo;
 	}
 
 }

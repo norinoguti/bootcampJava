@@ -3,6 +3,7 @@ package br.com.alura.carteira.servlet;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,31 +23,43 @@ public class TransacoesServlet extends HttpServlet {
 	private List<Transacao> transacoes = new ArrayList<>();
 	
 	@Override
-	protected void service(HttpServletRequest req, HttpServletResponse res) 
-			throws ServletException, IOException {
-		
-		Transacao t1 = new Transacao();
-		t1.setTicker("ITSA4");
-		t1.setPreco(new BigDecimal("10.0"));
-		t1.setQuantidade(100);
-		t1.setData(LocalDate.now());
-		t1.setTipo(TipoTransacao.COMPRA);
-
-		Transacao t2 = new Transacao();
-		t2.setTicker("BBSE3");
-		t2.setPreco(new BigDecimal("11.50"));
-		t2.setQuantidade(80);
-		t2.setData(LocalDate.of(2021, 1, 31));
-		t2.setTipo(TipoTransacao.COMPRA);
-		
-		transacoes.add(t1);
-		transacoes.add(t2);
+	protected void doGet(HttpServletRequest req, HttpServletResponse res)
+			throws ServletException, IOException {		
 		
 		req.setAttribute("transacoes", transacoes);
 		
-		req.getRequestDispatcher("WEB-INF/jsp/transacoes.jsp").forward(req, res);
+		req.getRequestDispatcher("WEB-INF/jsp/transacoes.jsp").
+		forward(req, res);
 
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		
+		String ticker = req.getParameter("ticker");
+		LocalDate data = LocalDate.parse(req.getParameter("data"),
+						 DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+		BigDecimal preco = new BigDecimal(req.getParameter("preco").replace(",","."));
+		int quantidade = Integer.parseInt(req.getParameter("quantidade"));
+		TipoTransacao tipo = TipoTransacao.valueOf(req.getParameter("tipo"));
+		
+		
+		
+		Transacao transacao = new Transacao(
+				ticker,
+				data,
+				preco,
+				quantidade,
+				tipo);
+				
+		
+		transacoes.add(transacao);
+		
+		resp.sendRedirect("transacoes");
 		
 	}
+	
+	
 
 }
