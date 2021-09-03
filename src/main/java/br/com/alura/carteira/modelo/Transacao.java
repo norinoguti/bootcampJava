@@ -18,13 +18,15 @@ public class Transacao {
 
 
 
+	
+	
+
 	@Override
 	public String toString() {
-		return "Transacao [ticker=" + ticker + ", preco=" + preco + ", data=" + data + ", tipo=" + tipo
-				+ ", quantidade=" + quantidade + "]";
+		return "Transacao [ticker=" + ticker + ", data=" + data .format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+				+ ", preco=" + preco + ", quantidade=" + quantidade
+				+ ", tipo=" + tipo + "]";
 	}
-
-	
 
 	public Transacao() {};
 

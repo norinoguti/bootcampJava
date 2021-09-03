@@ -26,7 +26,12 @@ public class Teste {
 		System.out.println(t.getTipo());
 		
 		
-		Transacao t2 = new Transacao("XPTO12", new BigDecimal("12.7"), LocalDate.now(), 200, TipoTransacao.VENDA);
+		Transacao t2 = new Transacao(
+				"XPTO12", 
+				LocalDate.now(),
+				new BigDecimal("12.99"),
+				200,
+				TipoTransacao.COMPRA);
 
 		System.out.println(t2);
 	}
