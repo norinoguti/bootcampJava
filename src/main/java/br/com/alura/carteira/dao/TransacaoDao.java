@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import br.com.alura.carteira.modelo.TipoTransacao;
@@ -40,7 +41,7 @@ public class TransacaoDao {
 		}
 
 	}
-
+	
 	public List<Transacao> listar() {
 		try {
 			String sql = "select * from transacoes";
@@ -48,6 +49,7 @@ public class TransacaoDao {
 			PreparedStatement ps = conexao.prepareStatement(sql);
 
 			ResultSet rs = ps.executeQuery();
+		
 
 			List<Transacao> transacoes = new ArrayList<>();
 			while (rs.next()) {
@@ -57,6 +59,7 @@ public class TransacaoDao {
 				t.setPreco(rs.getBigDecimal("preco"));
 				t.setQuantidade(rs.getInt("quantidade"));
 				t.setTipo(TipoTransacao.valueOf(rs.getString("tipo")));
+				
 
 				transacoes.add(t);
 
@@ -69,5 +72,7 @@ public class TransacaoDao {
 		}
 
 	}
+	
+	
 
 }

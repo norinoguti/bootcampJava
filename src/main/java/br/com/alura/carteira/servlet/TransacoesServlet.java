@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.com.alura.carteira.dao.TransacaoDao;
+import br.com.alura.carteira.factory.ConnectionFactory;
 import br.com.alura.carteira.modelo.TipoTransacao;
 import br.com.alura.carteira.modelo.Transacao;
 
@@ -20,19 +20,22 @@ import br.com.alura.carteira.modelo.Transacao;
 @WebServlet("/transacoes")
 public class TransacoesServlet extends HttpServlet {
 	
-	private List<Transacao> transacoes = new ArrayList<>();
+	private TransacaoDao dao;	
+	
+	public TransacoesServlet() {		
+		this.dao = new TransacaoDao(new ConnectionFactory().getConnection());			
+	}		
 	
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse res)
-			throws ServletException, IOException {		
+	protected void doGet(HttpServletRequest req, HttpServletResponse res)throws ServletException, IOException {		
 		
-		req.setAttribute("transacoes", transacoes);
-		
-		req.getRequestDispatcher("WEB-INF/jsp/transacoes.jsp").
-		forward(req, res);
+		req.setAttribute("transacoes", dao.listar());		
+		req.getRequestDispatcher("WEB-INF/jsp/transacoes.jsp").forward(req, res);
 
 	}
 	
+	
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
@@ -46,6 +49,7 @@ public class TransacoesServlet extends HttpServlet {
 		
 		
 		
+		
 		Transacao transacao = new Transacao(
 				ticker,
 				data,
@@ -54,7 +58,7 @@ public class TransacoesServlet extends HttpServlet {
 				tipo);
 				
 		
-		transacoes.add(transacao);
+		dao.cadastrar(transacao);
 		
 		resp.sendRedirect("transacoes");
 		

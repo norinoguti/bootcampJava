@@ -12,20 +12,16 @@ public class Transacao {
 	private LocalDate data;
 	private BigDecimal preco;
 	private int quantidade;
-	private TipoTransacao tipo;
-	
+	private TipoTransacao tipo;	
 	
 
-
-
-	
 	
 
 	@Override
 	public String toString() {
-		return "Transacao [ticker=" + ticker + ", data=" + data .format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+		return "Transacao [ticker=" + ticker + ", data=" + data.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
 				+ ", preco=" + preco + ", quantidade=" + quantidade
-				+ ", tipo=" + tipo + "]";
+				+ ", tipo=" + tipo.name() + "]";
 	}
 
 	public Transacao() {};
@@ -38,9 +34,6 @@ public class Transacao {
 		this.quantidade = quantidade;
 		this.tipo = tipo;
 	}
-
-
-
 
 
 	public String getTicker() {
